@@ -2,5 +2,6 @@
 {
     public class EventOrganiser : User
     {
+        public List<Event> Events { get; set; }
     }
 }
