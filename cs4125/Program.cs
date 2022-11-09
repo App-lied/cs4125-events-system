@@ -8,7 +8,7 @@ builder.Services.AddDbContext<cs4125Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("cs4125Context") ?? throw new InvalidOperationException("Connection string 'cs4125Context' not found.")));
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString = builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
