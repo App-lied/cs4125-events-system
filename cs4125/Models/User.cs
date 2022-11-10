@@ -1,8 +1,13 @@
-﻿namespace cs4125.Models
+﻿using cs4215.models;
+
+namespace cs4125.models
 {
-    public abstract class User
+    public class User : IProfile
     {
-        public string Email { get; set; }   
-        public DateTime DateOfBirth { get; set; }   
+        public void GetProfile()
+        {
+            Console.WriteLine("User Profile");
+        }
+
     }
 }
