@@ -8,5 +8,6 @@ namespace cs4125
         {
             Console.WriteLine("Event Organiser Profile");
         }
+        public List<Event> Events { get; set; }
     }
 }
