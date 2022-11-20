@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using cs4125.Models;
+using cs4125.models;
 
 namespace cs4125.Data
 {
@@ -15,5 +16,7 @@ namespace cs4125.Data
         }
 
         public DbSet<cs4125.Models.Event> Event { get; set; } = default!;
+
+        public DbSet<cs4125.models.User> User { get; set; }
     }
 }
