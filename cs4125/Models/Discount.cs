@@ -15,7 +15,7 @@
 
         public double getDiscount(User cust, Event ev)
         {
-            if(cust.getAge() > ageLimit)
+            if(cust.getAge() >= ageLimit)
             {
                 return discount;
             }
