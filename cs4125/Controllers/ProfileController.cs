@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using cs4125.models;
+using cs4125.Models;
+using cs4215.models;
 
 namespace cs4125.Controllers
 {
@@ -8,6 +11,11 @@ namespace cs4125.Controllers
         // GET: ProfileController
         public ActionResult Profile()
         {
+            User U = new User();
+            //U.Email = "test.email@example.com";
+            U.Name = "Example Name";
+            ViewBag.test = U.test();
+            ViewBag.Name = U.Name;
             return View();
         }
 
