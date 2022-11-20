@@ -1,5 +1,8 @@
 ﻿namespace cs4125.Models
 {
+    /// <summary>
+    /// Class <c> Ticket </c> models a purchasable ticket for an event.
+    /// </summary>
     public class Ticket
     {
         public double BasePrice { get; set; }
