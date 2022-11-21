@@ -1,37 +1,38 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using cs4125.models;
-using cs4125.Models;
-using cs4215.models;
 
 namespace cs4125.Controllers
 {
-    public class ProfileController : Controller
+    public class RegisterController : Controller
     {
-        // GET: ProfileController
-        public ActionResult Profile()
+        // GET: MyTicketsController
+        public ActionResult Register()
         {
-            User U = new User();
-            //U.Email = "test.email@example.com";
-            U.Name = "JJ Collins";
-            ViewBag.test = U.test();
-            ViewBag.Name = U.Name;
+           // string strEmail = form["password"].ToString();
             return View();
         }
 
-        // GET: ProfileController/Details/5
+        [HttpPost]
+        public ActionResult EmailEntered()
+        {
+           
+
+            return Content("Account Created");
+        }
+
+        // GET: MyTicketsController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: ProfileController/Create
+        // GET: MyTicketsController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: ProfileController/Create
+        // POST: MyTicketsController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -46,13 +47,13 @@ namespace cs4125.Controllers
             }
         }
 
-        // GET: ProfileController/Edit/5
+        // GET: MyTicketsController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: ProfileController/Edit/5
+        // POST: MyTicketsController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -67,13 +68,13 @@ namespace cs4125.Controllers
             }
         }
 
-        // GET: ProfileController/Delete/5
+        // GET: MyTicketsController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: ProfileController/Delete/5
+        // POST: MyTicketsController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
