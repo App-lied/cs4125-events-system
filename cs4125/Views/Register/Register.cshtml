@@ -2,33 +2,46 @@
 @{
     ViewData["Title"] = "Register";
 }
+@{
+var parms = new Dictionary<string, string>
+    {
+        {"email", ""},
+        {"password", ""},
+        {"password2", ""},
+        {"Name", ""}
+    };
+}
+<head>
+    <script>
+        function myFunction(){
+            parms["email"] = document.getElementById("email").value;
+            parms["password"] = document.getElementById("password").value;
+            parms["password2"] = document.getElementById("password2").value;
+            parms["Name"] = document.getElementById("Name").value;
+        }
+    </script>
+</head>
 
 <html>
-    <head>
-        <script>
-                function myFunction2() {
-            document.getElementById("test").innerHTML = "Paragraph changed.";
-                    if (document.getElementById("password").value == document.getElementById("password2").value && document.getElementById("password").value != ""){
-                        document.getElementById("test").innerHTML = "Paragraph bitt.";
-                        ViewBag.password = document.getElementById("password").value
-                    }
-                }
-            </script>
-    </head>
 
 <h1>Register</h1>
 
 <body>
 @*<div class="container">   *@
-            <label>Email Address : </label>   
-            <input type="text" placeholder="Enter Email" name="email" required>  
-            <label>Enter Password : </label>
-        <input type="password" placeholder="Enter Password" name="password" id="password" required>
-            <label>Re-Enter Password : </label>
-        <input type="password" placeholder="Re-Enter Password" name="password2" id ="password2" required>
-            <button type="submit" onclick="myFunction2()">Register</button>
-            <input type="checkbox" checked="checked"> Remember me   
+    <label id="test">Email Address : </label>
+    <input type="text" id="email" placeholder="Enter Email" name="email" required>
+    <label>Enter Password : </label>
+    <input type="password" placeholder="Enter Password" name="password" id="password" required>
+    <label>Re-Enter Password : </label>
+    <input type="password" placeholder="Re-Enter Password" name="password2" id ="password2" required>
+    <label>Enter Name : </label>
+    <input type= "Name" placeholder="Enter Name" name="Name" id ="Name" required>
+    <button type="submit" onclick="myFunction()" asp-all-route-data="parms" asp-area="" asp-controller="Register" asp-action="EmailEntered">Register</button>
+
+            <input type="checkbox" checked="checked"> Premium Account?   
             <button type="button" class="cancelbtn"> Cancel</button>   
              Forgot <a href="#"> password? </a>
 </body>
+
+
 </html>

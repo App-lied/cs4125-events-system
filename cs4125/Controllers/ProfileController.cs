@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using cs4125.models;
 using cs4125.Models;
 using cs4215.models;
+using System.IO;
+using Microsoft.JSInterop.Implementation;
 
 namespace cs4125.Controllers
 {
@@ -11,11 +13,17 @@ namespace cs4125.Controllers
         // GET: ProfileController
         public ActionResult Profile()
         {
+            /*string[] rawCSV = System.IO.File.ReadAllLines("C:\\Users\\Conor\\Documents\\CollegeWork\\LoginInformation.txt");
+            string name = "JJ Collins";
             User U = new User();
             //U.Email = "test.email@example.com";
             U.Name = "JJ Collins";
-            ViewBag.test = U.test();
-            ViewBag.Name = U.Name;
+            */
+
+            LoggedInUser loggedInUser = LoggedInUser.GetInstance("", "");
+            String ProfileName = loggedInUser.Email;
+
+            ViewBag.Name =  ProfileName;
             return View();
         }
 

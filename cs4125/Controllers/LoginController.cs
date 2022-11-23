@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using cs4125.FactoryInterface;
+using cs4125.models;
+using cs4215.models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace cs4125.Controllers
@@ -9,6 +12,20 @@ namespace cs4125.Controllers
         public ActionResult Login()
         {
             
+            return View();
+        }
+
+        public ActionResult EmailEntered(string email, string password)
+        {
+            string[] data = System.IO.File.ReadAllLines("C:\\Users\\Conor\\Documents\\CollegeWork\\LoginInformation.txt");
+            for (int i = 0; i < data.Length; i++)
+            {
+                string[] rowData = data[i].Split(',');
+                if (rowData[0] == email && rowData[1] == password)
+                {
+                    LoggedInUser login = LoggedInUser.GetInstance(email, password);
+                }
+            }
             return View();
         }
 

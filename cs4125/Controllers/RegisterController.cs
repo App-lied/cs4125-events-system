@@ -1,5 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using cs4125.FactoryInterface;
+using cs4125.models;
+using cs4215.models;
+using cs4125.Models;
 
 namespace cs4125.Controllers
 {
@@ -8,16 +13,24 @@ namespace cs4125.Controllers
         // GET: MyTicketsController
         public ActionResult Register()
         {
-           // string strEmail = form["password"].ToString();
             return View();
         }
 
-        [HttpPost]
-        public ActionResult EmailEntered()
+        public ActionResult EmailEntered(string email, string password, string password2, string name, Boolean premium)
         {
            
-
-            return Content("Account Created");
+            UserFactory userF = new UserFactory();
+            if (premium == true)
+            {
+                IProfile profile = userF.GetProfile(ProfileType.PremiumUser, email, password, name);
+                profile.writeInfoToCSV();
+            }
+            else { 
+                IProfile profile = userF.GetProfile(ProfileType.User, email, password, name);
+                profile.writeInfoToCSV();
+            }
+      
+            return View();
         }
 
         // GET: MyTicketsController/Details/5
