@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using cs4125.FactoryInterface;
 using cs4125.Models;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace cs4125.Controllers
 {
@@ -14,11 +15,16 @@ namespace cs4125.Controllers
             return View();
         }
 
-        public ActionResult EmailEntered(string email, string password, string password2, string name, Boolean premium)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Register(IFormCollection collection)
         {
-           
+            var email = collection["registrationEmail"];
+            var password = collection["registrationPassword"];
+            var name = collection["registrationName"];
+            var premium = collection["registrationPremium"];
             UserFactory userF = new UserFactory();
-            if (premium == true)
+            if (premium == "on")
             {
                 Profile profile = userF.GetProfile(ProfileType.PremiumUser, email, password, name);
                 profile.writeInfoToCSV();
@@ -27,8 +33,8 @@ namespace cs4125.Controllers
                 Profile profile = userF.GetProfile(ProfileType.User, email, password, name);
                 profile.writeInfoToCSV();
             }
-      
-            return View();
+
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: MyTicketsController/Details/5

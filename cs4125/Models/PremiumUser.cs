@@ -8,9 +8,9 @@
             Console.WriteLine("Premium User Profile");
         }
 
-        public void writeInfoToCSV()
+        public override void writeInfoToCSV()
         {
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter("C:\\Users\\Conor\\Documents\\CollegeWork\\LoginInformation.csv", true))
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter("Data/LoginInformation.csv", true))
             {
                 file.WriteLine(Email + "," + Name + "," + DateOfBirth.ToString()+",premium");
             }

@@ -22,5 +22,13 @@ namespace cs4125.Models
             if (DateOfBirth.Date > now.AddYears(-age)) age--;
             return age;
         }
+
+        public override void writeInfoToCSV()
+        {
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter("Data/LoginInformation.csv", true))
+            {
+                file.WriteLine(Email + "," + Name + "," + DateOfBirth.ToString());
+            }
+        }
     }
 }

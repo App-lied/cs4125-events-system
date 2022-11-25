@@ -9,12 +9,6 @@
         public DateTime DateOfBirth { get; set; }
 
         public abstract void GetProfile();
-        public void writeInfoToCSV()
-        {
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter("Data/LoginInformation.csv", true))
-            {
-                file.WriteLine(Email + "," + Name + "," + DateOfBirth.ToString());
-            }
-        }
+        public abstract void writeInfoToCSV();
     }
 }
