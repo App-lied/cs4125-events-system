@@ -1,4 +1,4 @@
-﻿using cs4125.Models;
+using cs4125.Models;
 using cs4215.models;
 using Microsoft.AspNetCore.Identity;
 using System.Drawing;
@@ -21,7 +21,12 @@ namespace cs4125.models
             Console.WriteLine("User Profile");
         }
 
-        
-        
+        public int getAge()
+        {
+            var now = DateTime.Today;
+            var age = now.Year - DateOfBirth.Year;
+            if (DateOfBirth.Date > now.AddYears(-age)) age--;
+            return age;
+        }
     }
 }
