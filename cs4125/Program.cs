@@ -1,7 +1,5 @@
-using cs4125.Data;
-using Microsoft.AspNetCore.Authorization;
+﻿using cs4125.Data;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,7 +8,7 @@ builder.Services.AddDbContext<cs4125Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("cs4125Context") ?? throw new InvalidOperationException("Connection string 'cs4125Context' not found.")));
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING");
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -18,14 +16,6 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
-
-builder.Services.AddControllers(config =>
-{
-    var policy = new AuthorizationPolicyBuilder()
-                     .RequireAuthenticatedUser()
-                     .Build();
-    config.Filters.Add(new AuthorizeFilter(policy));
-});
 
 var app = builder.Build();
 

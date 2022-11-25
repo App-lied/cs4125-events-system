@@ -1,5 +1,4 @@
 ﻿using cs4125.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -14,7 +13,6 @@ namespace cs4125.Controllers
             _logger = logger;
         }
 
-        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
@@ -26,7 +24,6 @@ namespace cs4125.Controllers
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        [AllowAnonymous]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
