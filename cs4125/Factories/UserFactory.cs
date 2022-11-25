@@ -1,14 +1,12 @@
 ﻿using System;
-using cs4125.models;
 using cs4125.Models;
-using cs4215.models;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
 namespace cs4125.FactoryInterface
 {
     public class UserFactory : IProfileFactory
     {
-        public IProfile GetProfile(ProfileType profileType, string email, string password, string username)
+        public Profile GetProfile(ProfileType profileType, string email, string password, string username)
         {
             switch (profileType)
             {

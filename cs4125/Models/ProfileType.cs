@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace cs4125.models
+namespace cs4125.Models
 {
     public enum ProfileType
     {

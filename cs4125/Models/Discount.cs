@@ -1,4 +1,5 @@
-﻿namespace cs4125.Models
+﻿
+namespace cs4125.Models
 {
     /// <summary>
     /// Interface abstracting a discount campaign for an event.

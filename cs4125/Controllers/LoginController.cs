@@ -1,6 +1,5 @@
 ﻿using cs4125.FactoryInterface;
-using cs4125.models;
-using cs4215.models;
+using cs4125.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

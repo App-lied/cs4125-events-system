@@ -16,7 +16,7 @@
             Purchased = false;
         }
 
-        public static Ticket createTicket(double p, Seat s) { 
+        public static Ticket createTicket(double price, Seat s) { 
             return new Ticket(price, s);
         }
     }

@@ -2,8 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using cs4125.FactoryInterface;
-using cs4125.models;
-using cs4215.models;
 using cs4125.Models;
 
 namespace cs4125.Controllers
@@ -22,11 +20,11 @@ namespace cs4125.Controllers
             UserFactory userF = new UserFactory();
             if (premium == true)
             {
-                IProfile profile = userF.GetProfile(ProfileType.PremiumUser, email, password, name);
+                Profile profile = userF.GetProfile(ProfileType.PremiumUser, email, password, name);
                 profile.writeInfoToCSV();
             }
             else { 
-                IProfile profile = userF.GetProfile(ProfileType.User, email, password, name);
+                Profile profile = userF.GetProfile(ProfileType.User, email, password, name);
                 profile.writeInfoToCSV();
             }
       
