@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-//
+
 namespace cs4125.Controllers
 {
     public class ProfileController : Controller
