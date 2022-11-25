@@ -1,14 +1,12 @@
 ﻿using System;
-using cs4125.Controllers.FactoryInterface;
 using cs4125.models;
-using cs4125;
 using cs4215.models;
 
-namespace cs4125.Controllers
+namespace cs4125.FactoryInterface
 {
     public class EventOrganiserFactory : IProfileFactory
     {
-        public IProfile GetProfile(ProfileType profileType)
+        public IProfile GetProfile(ProfileType profileType, string email, string password, string username)
         {
             switch (profileType)
             {

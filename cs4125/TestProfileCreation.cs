@@ -1,5 +1,5 @@
 ﻿using cs4125.Controllers;
-using cs4125.Controllers.FactoryInterface;
+using cs4125.FactoryInterface;
 using cs4125.models;
 using cs4215.models;
 
@@ -10,9 +10,9 @@ namespace cs4125
         static void Main(string[] args)
         {
             IProfileFactory profileFactory = new UserFactory();
-            IProfile profile = profileFactory.GetProfile(ProfileType.User);
+            IProfile profile = profileFactory.GetProfile(ProfileType.User, "", "", "");
 
-            profile.GetProfile();
+            //profile.GetProfile();
 
             Console.ReadKey();
         }
