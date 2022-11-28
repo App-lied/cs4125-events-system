@@ -8,11 +8,11 @@
     // during first access to the Singleton.
     private static readonly object _lock = new object();
 
-    public static LoggedInUser GetInstance(string email, string password)
+    public static LoggedInUser GetInstance(string email, string password, string name, bool createIfNeeded = true)
     {
         // This conditional is needed to prevent threads stumbling over the
         // lock once the instance is ready.
-        if (_instance == null)
+        if (_instance == null && createIfNeeded)
         {
             // Now, imagine that the program has just been launched. Since
             // there's no Singleton instance yet, multiple threads can
@@ -33,6 +33,7 @@
                     _instance = new LoggedInUser();
                     _instance.Email = email;
                     _instance.Password = password;
+                    _instance.Name = name;
                 }
             }
         }
@@ -42,4 +43,6 @@
     // We'll use this property to prove that our Singleton really works.
     public string Email { get; set; }
     public string Password { get; set; }
+
+    public string Name { get; set; }
 }

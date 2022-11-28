@@ -1,19 +1,24 @@
-﻿
+﻿@model cs4125.Models.Profile
 @{
     ViewData["Title"] = "Login";
 }
 
 <html>
-<h1>Login</h1>
 
-<div class="container">   
-            <label>Email Address :</label>   
-           
-            <input type="text" placeholder="Enter Email" name="email" required>  
-            <label>Password : </label>   
-            <input type="text" placeholder="Enter Password" name="password" required>  
-            <button type="submit">Login</button>
-            <input type="checkbox" checked="checked"> Remember me   
-            <button type="button" class="cancelbtn"> Cancel</button>   
-             Forgot <a href="#"> password? </a>
+<h1>Log In</h1>
+<h2>@ViewBag.error</h2>
+
+<body>
+    <form asp-controller="Login" asp-action="Login" method="post">
+        <div class="form-group">
+            <input type="email" class="form-control" name="loginEmail" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" name="loginPassword" placeholder="Enter password">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</body>
+
+
 </html>

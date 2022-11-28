@@ -9,6 +9,19 @@
         public DateTime DateOfBirth { get; set; }
 
         public abstract void GetProfile();
-        public abstract void writeInfoToCSV();
+        public int getAge()
+        {
+            var now = DateTime.Today;
+            var age = now.Year - DateOfBirth.Year;
+            if (DateOfBirth.Date > now.AddYears(-age)) age--;
+            return age;
+        }
+        public virtual void writeInfoToCSV()
+        {
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter("Data/LoginInformation.csv", true))
+            {
+                file.WriteLine(Email + "," + Password + "," + Name + "," + DateOfBirth.Date.ToString());
+            }
+        }
     }
 }

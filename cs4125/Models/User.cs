@@ -15,20 +15,5 @@ namespace cs4125.Models
             Console.WriteLine("User Profile");
         }
 
-        public int getAge()
-        {
-            var now = DateTime.Today;
-            var age = now.Year - DateOfBirth.Year;
-            if (DateOfBirth.Date > now.AddYears(-age)) age--;
-            return age;
-        }
-
-        public override void writeInfoToCSV()
-        {
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter("Data/LoginInformation.csv", true))
-            {
-                file.WriteLine(Email + "," + Name + "," + DateOfBirth.ToString());
-            }
-        }
     }
 }

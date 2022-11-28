@@ -11,18 +11,17 @@ namespace cs4125.Controllers
         // GET: ProfileController
         public ActionResult Profile()
         {
-            /*string[] rawCSV = System.IO.File.ReadAllLines("C:\\Users\\Conor\\Documents\\CollegeWork\\LoginInformation.txt");
-            string name = "JJ Collins";
-            User U = new User();
-            //U.Email = "test.email@example.com";
-            U.Name = "JJ Collins";
-            */
+            
+           LoggedInUser UserCheck = LoggedInUser.GetInstance("", "", "", false);
+            if (UserCheck != null)
+            {
+                LoggedInUser loggedInUser = LoggedInUser.GetInstance("", "", "");
+                String ProfileName = loggedInUser.Email;
 
-            LoggedInUser loggedInUser = LoggedInUser.GetInstance("", "");
-            String ProfileName = loggedInUser.Email;
-
-            ViewBag.Name =  ProfileName;
-            return View();
+                ViewBag.Name = ProfileName;
+                return View();
+            }
+            return RedirectToAction("Login", "Login");
         }
 
         // GET: ProfileController/Details/5

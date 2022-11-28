@@ -21,20 +21,49 @@ namespace cs4125.Controllers
         {
             var email = collection["registrationEmail"];
             var password = collection["registrationPassword"];
+            var password2 = collection["registrationPassword2"];
             var name = collection["registrationName"];
             var premium = collection["registrationPremium"];
-            UserFactory userF = new UserFactory();
-            if (premium == "on")
+            DateTime birth = DateTime.Parse(collection["registrationDate"]);
+            if (password == password2)
             {
-                Profile profile = userF.GetProfile(ProfileType.PremiumUser, email, password, name);
-                profile.writeInfoToCSV();
+                UserFactory userF = new UserFactory();
+                if (premium == "on")
+                {
+                    Profile profile = userF.GetProfile(ProfileType.PremiumUser, email, password, name, birth);
+                    if (profile.getAge() <= 16)
+                    {
+                        ViewBag.error = "Profile not created: Must be over 16 years old";
+                        return View();
+                    }
+                    else
+                    {
+                        profile.writeInfoToCSV();
+                        LoggedInUser login = LoggedInUser.GetInstance(email, password, name);
+                        return RedirectToAction("Profile", "Profile");
+                    }
+                }
+                else
+                {
+                    Profile profile = userF.GetProfile(ProfileType.User, email, password, name, birth);
+                    if (profile.getAge() <= 16)
+                    {
+                        ViewBag.error = "Profile not created: Must be over 16 years old";
+                        return View();
+                    }
+                    else
+                    {
+                        profile.writeInfoToCSV();
+                        LoggedInUser login = LoggedInUser.GetInstance(email, password, name);
+                        return RedirectToAction("Profile", "Profile");
+                    }
+                }
             }
-            else { 
-                Profile profile = userF.GetProfile(ProfileType.User, email, password, name);
-                profile.writeInfoToCSV();
+            else
+            {
+                ViewBag.error = "Profile not created: Passwords don't match";
+                return View();
             }
-
-            return RedirectToAction("Index", "Home");
         }
 
         // GET: MyTicketsController/Details/5

@@ -14,17 +14,23 @@ namespace cs4125.Controllers
             return View();
         }
 
-        public ActionResult EmailEntered(string email, string password)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(IFormCollection collection)
         {
-            string[] data = System.IO.File.ReadAllLines("C:\\Users\\Conor\\Documents\\CollegeWork\\LoginInformation.txt");
+            var email = collection["loginEmail"];
+            var password = collection["loginPassword"];
+            string[] data = System.IO.File.ReadAllLines("Data/LoginInformation.csv");
             for (int i = 0; i < data.Length; i++)
             {
                 string[] rowData = data[i].Split(',');
                 if (rowData[0] == email && rowData[1] == password)
                 {
-                    LoggedInUser login = LoggedInUser.GetInstance(email, password);
+                    LoggedInUser login = LoggedInUser.GetInstance(email, password, rowData[3]);
+                    return RedirectToAction("Profile", "Profile");
                 }
             }
+            ViewBag.error = "Can't Log in: Email and Password don't match or are not registered";
             return View();
         }
 

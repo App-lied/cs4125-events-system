@@ -9,7 +9,7 @@ namespace cs4125
         static void Main(string[] args)
         {
             IProfileFactory profileFactory = new UserFactory();
-            Profile profile = profileFactory.GetProfile(ProfileType.User, "", "", "");
+            //Profile profile = profileFactory.GetProfile(ProfileType.User, "", "", "", );
 
             //profile.GetProfile();
 
