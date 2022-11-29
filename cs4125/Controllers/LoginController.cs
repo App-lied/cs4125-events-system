@@ -26,7 +26,7 @@ namespace cs4125.Controllers
                 string[] rowData = data[i].Split(',');
                 if (rowData[0] == email && rowData[1] == password)
                 {
-                    LoggedInUser login = LoggedInUser.GetInstance(email, password, rowData[3]);
+                    LoggedInUser login = LoggedInUser.GetInstance(email, password, rowData[2]);
                     return RedirectToAction("Profile", "Profile");
                 }
             }

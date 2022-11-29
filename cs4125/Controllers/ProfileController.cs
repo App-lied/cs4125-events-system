@@ -16,9 +16,13 @@ namespace cs4125.Controllers
             if (UserCheck != null)
             {
                 LoggedInUser loggedInUser = LoggedInUser.GetInstance("", "", "");
-                String ProfileName = loggedInUser.Email;
 
-                ViewBag.Name = ProfileName;
+                if (loggedInUser.photo != "")
+                    ViewBag.Photo = loggedInUser.photo;
+                else
+                    ViewBag.Photo = "https://www.ul.ie/sites/default/files/styles/person_portrait/public/scieng/CollinsJJ.jpg?h=4997dc06&itok=4dfbz-0i";
+
+                ViewBag.Name = loggedInUser.Name;
                 return View();
             }
             return RedirectToAction("Login", "Login");
