@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using cs4125.models;
 using cs4125.Models;
-using cs4215.models;
 using System.IO;
 using Microsoft.JSInterop.Implementation;
+using static System.Net.WebRequestMethods;
 
 namespace cs4125.Controllers
 {
@@ -13,18 +12,17 @@ namespace cs4125.Controllers
         // GET: ProfileController
         public ActionResult Profile()
         {
-            /*string[] rawCSV = System.IO.File.ReadAllLines("C:\\Users\\Conor\\Documents\\CollegeWork\\LoginInformation.txt");
-            string name = "JJ Collins";
-            User U = new User();
-            //U.Email = "test.email@example.com";
-            U.Name = "JJ Collins";
-            */
+            
+           LoggedInUser UserCheck = LoggedInUser.GetInstance("", "", "", "", false);
+            if (UserCheck != null)
+            {
+                LoggedInUser loggedInUser = LoggedInUser.GetInstance("", "", "");
 
-            LoggedInUser loggedInUser = LoggedInUser.GetInstance("", "");
-            String ProfileName = loggedInUser.Email;
-
-            ViewBag.Name =  ProfileName;
-            return View();
+                ViewBag.Photo = loggedInUser.photo;
+                ViewBag.Name = loggedInUser.Name;
+                return View();
+            }
+            return RedirectToAction("Login", "Login");
         }
 
         // GET: ProfileController/Details/5

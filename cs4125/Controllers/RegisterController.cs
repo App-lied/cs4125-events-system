@@ -2,9 +2,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using cs4125.FactoryInterface;
-using cs4125.models;
-using cs4215.models;
 using cs4125.Models;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace cs4125.Controllers
 {
@@ -16,21 +15,55 @@ namespace cs4125.Controllers
             return View();
         }
 
-        public ActionResult EmailEntered(string email, string password, string password2, string name, Boolean premium)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Register(IFormCollection collection)
         {
-           
-            UserFactory userF = new UserFactory();
-            if (premium == true)
+            var email = collection["registrationEmail"];
+            var password = collection["registrationPassword"];
+            var password2 = collection["registrationPassword2"];
+            var name = collection["registrationName"];
+            var premium = collection["registrationPremium"];
+            DateTime birth = DateTime.Parse(collection["registrationDate"]);
+            if (password == password2)
             {
-                IProfile profile = userF.GetProfile(ProfileType.PremiumUser, email, password, name);
-                profile.writeInfoToCSV();
+                UserFactory userF = new UserFactory();
+                if (premium == "on")
+                {
+                    Profile profile = userF.GetProfile(ProfileType.PremiumUser, email, password, name, birth);
+                    if (profile.getAge() <= 16)
+                    {
+                        ViewBag.error = "Profile not created: Must be over 16 years old";
+                        return View();
+                    }
+                    else
+                    {
+                        profile.writeInfoToCSV();
+                        LoggedInUser login = LoggedInUser.GetInstance(email, password, name);
+                        return RedirectToAction("Profile", "Profile");
+                    }
+                }
+                else
+                {
+                    Profile profile = userF.GetProfile(ProfileType.User, email, password, name, birth);
+                    if (profile.getAge() <= 16)
+                    {
+                        ViewBag.error = "Profile not created: Must be over 16 years old";
+                        return View();
+                    }
+                    else
+                    {
+                        profile.writeInfoToCSV();
+                        LoggedInUser login = LoggedInUser.GetInstance(email, password, name);
+                        return RedirectToAction("Profile", "Profile");
+                    }
+                }
             }
-            else { 
-                IProfile profile = userF.GetProfile(ProfileType.User, email, password, name);
-                profile.writeInfoToCSV();
+            else
+            {
+                ViewBag.error = "Profile not created: Passwords don't match";
+                return View();
             }
-      
-            return View();
         }
 
         // GET: MyTicketsController/Details/5

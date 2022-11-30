@@ -29,7 +29,7 @@
             Discounts= new List<IDiscount>();
             Tickets = new List<Ticket>();  
 
-            foreach (Block b in venue) { 
+            foreach (Block b in venue.Blocks) { 
                 foreach (Seat s in b.Seats)
                 {
                     Tickets.Add(Ticket.createTicket(basePrice, s));
