@@ -1,4 +1,6 @@
-﻿class LoggedInUser
+﻿using static System.Net.WebRequestMethods;
+
+class LoggedInUser
 {
     private LoggedInUser() { }
 
@@ -8,7 +10,7 @@
     // during first access to the Singleton.
     private static readonly object _lock = new object();
 
-    public static LoggedInUser GetInstance(string email, string password, string name, bool createIfNeeded = true)
+    public static LoggedInUser GetInstance(string email, string password, string name, string photo = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png", bool createIfNeeded = true)
     {
         // This conditional is needed to prevent threads stumbling over the
         // lock once the instance is ready.
@@ -34,6 +36,7 @@
                     _instance.Email = email;
                     _instance.Password = password;
                     _instance.Name = name;
+                    _instance.photo = photo;
                 }
             }
         }

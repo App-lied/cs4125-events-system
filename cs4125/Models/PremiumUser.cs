@@ -12,7 +12,7 @@
         {
             using (System.IO.StreamWriter file = new System.IO.StreamWriter("Data/LoginInformation.csv", true))
             {
-                file.WriteLine(Email + "," + Name + "," + DateOfBirth.ToString()+",premium");
+                file.WriteLine(Email + "," + Password + "," + Name + "," + DateOfBirth.ToString()+ ", https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" + " , premium");
             }
         }
     }

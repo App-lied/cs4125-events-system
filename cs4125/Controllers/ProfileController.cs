@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using cs4125.Models;
 using System.IO;
 using Microsoft.JSInterop.Implementation;
+using static System.Net.WebRequestMethods;
 
 namespace cs4125.Controllers
 {
@@ -12,16 +13,12 @@ namespace cs4125.Controllers
         public ActionResult Profile()
         {
             
-           LoggedInUser UserCheck = LoggedInUser.GetInstance("", "", "", false);
+           LoggedInUser UserCheck = LoggedInUser.GetInstance("", "", "", "", false);
             if (UserCheck != null)
             {
                 LoggedInUser loggedInUser = LoggedInUser.GetInstance("", "", "");
 
-                if (loggedInUser.photo != "")
-                    ViewBag.Photo = loggedInUser.photo;
-                else
-                    ViewBag.Photo = "https://www.ul.ie/sites/default/files/styles/person_portrait/public/scieng/CollinsJJ.jpg?h=4997dc06&itok=4dfbz-0i";
-
+                ViewBag.Photo = loggedInUser.photo;
                 ViewBag.Name = loggedInUser.Name;
                 return View();
             }

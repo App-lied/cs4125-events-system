@@ -13,14 +13,12 @@ namespace cs4125.Controllers
         public ActionResult EditProfile()
         {
             
-            LoggedInUser UserCheck = LoggedInUser.GetInstance("", "", "", false);
+            LoggedInUser UserCheck = LoggedInUser.GetInstance("", "", "", "", false);
             if (UserCheck != null)
             {
                 LoggedInUser loggedInUser = LoggedInUser.GetInstance("", "", "");
-                if (loggedInUser.photo != "")
-                    ViewBag.Photo = loggedInUser.photo;
-                else
-                    ViewBag.Photo = "https://www.ul.ie/sites/default/files/styles/person_portrait/public/scieng/CollinsJJ.jpg?h=4997dc06&itok=4dfbz-0i";
+                ViewBag.Photo = loggedInUser.photo;
+
 
                 ViewBag.Name = loggedInUser.Name;
                 return View();
@@ -95,8 +93,8 @@ namespace cs4125.Controllers
                     string[] rowData = data[i].Split(',');
                     if (rowData[0] == email && rowData[1] == loggedInUser.Password)
                     {
-                        //string newCSVFile = csvFile.Replace(loggedInUser.photo, photo);
-                        //System.IO.File.WriteAllText("Data/LoginInformation.csv", newCSVFile);
+                        string newCSVFile = csvFile.Replace(loggedInUser.photo, photo);
+                        System.IO.File.WriteAllText("Data/LoginInformation.csv", newCSVFile);
                         loggedInUser.photo = photo;
                     }
                 }
