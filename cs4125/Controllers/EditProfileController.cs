@@ -62,12 +62,14 @@ namespace cs4125.Controllers
                     }
                     else
                     {
+                        //returns error and refreshes page
                         ViewBag.error = "New passwords do not match";
                         return View();
                     }
                 } 
                 else 
                 {
+                    //returns error and refreshes page
                     ViewBag.error = "Old password is incorrect";
                     return View();
                 }
@@ -102,6 +104,7 @@ namespace cs4125.Controllers
                 }
             }
 
+            //returns to the profile page
             return RedirectToAction("Profile", "Profile");
         }
 
