@@ -10,7 +10,12 @@ namespace cs4125.FactoryInterface
             switch (profileType)
             {
                 case ProfileType.EventOrganiser:
-                    return new EventOrganiser();
+                    EventOrganiser U = new EventOrganiser();
+                    U.Email = email;
+                    U.Name = username;
+                    U.Password = password;
+                    U.DateOfBirth = date;
+                    return U;
                 default:
                     throw new Exception("Invalid profile type");
             }
