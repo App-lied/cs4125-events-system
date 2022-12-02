@@ -1,9 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using cs4125.Models;
-using System.IO;
-using Microsoft.JSInterop.Implementation;
-using cs4125.FactoryInterface;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace cs4125.Controllers
 {
@@ -12,7 +7,10 @@ namespace cs4125.Controllers
         // GET: ProfileController
         public ActionResult EditProfile()
         {
-            
+            //uses singleton method to lock in a user as the logged in user
+
+            //uses the createdIfNeeded boolean operator to choose to not create a new instance so that it can check if one is created
+            //if one is created, it will load profile with the necessary information, otherwise it redirects to the login page
             LoggedInUser UserCheck = LoggedInUser.GetInstance("", "", "", "", false);
             if (UserCheck != null)
             {
@@ -30,6 +28,7 @@ namespace cs4125.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditProfile(IFormCollection collection)
         {
+            //uses singleton method to get the Email
             LoggedInUser loggedInUser = LoggedInUser.GetInstance("", "", "");
             var email = loggedInUser.Email;
             var oldPassword = collection["registrationOldPassword"];
@@ -37,10 +36,13 @@ namespace cs4125.Controllers
             var password2 = collection["registrationPassword2"];
             var name = collection["registrationName"];
             var photo = collection["registrationPhoto"];
-            var premium = collection["registrationPremium"];
+            
+            //reads in csv file information and stores all lines in an array
             string csvFile = System.IO.File.ReadAllText("Data/LoginInformation.csv");
             string[] data = System.IO.File.ReadAllLines("Data/LoginInformation.csv");
 
+            //series of checks to see if new values were collected in the form for password, name and photo
+            //If there are changes, it performs necessary checks before replacing the information in the csvFile and rewriting it
             if (password != "")
             {
                 if (oldPassword == loggedInUser.Password)
@@ -60,12 +62,14 @@ namespace cs4125.Controllers
                     }
                     else
                     {
+                        //returns error and refreshes page
                         ViewBag.error = "New passwords do not match";
                         return View();
                     }
                 } 
                 else 
                 {
+                    //returns error and refreshes page
                     ViewBag.error = "Old password is incorrect";
                     return View();
                 }
@@ -100,6 +104,7 @@ namespace cs4125.Controllers
                 }
             }
 
+            //returns to the profile page
             return RedirectToAction("Profile", "Profile");
         }
 
