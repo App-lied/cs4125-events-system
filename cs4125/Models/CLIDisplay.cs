@@ -1,4 +1,4 @@
-﻿using cs4125.FactoryInterface;
+using cs4125.FactoryInterface;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Xml.Linq;
@@ -64,6 +64,11 @@ namespace cs4125.Models
 
                 userProfileA.payForTickets();
                 userProfileB.payForTickets();
+                userProfileA.makeBooking(profile.getEvent(1), 'A', 1);
+
+                userProfileB.initializeLists();
+                userProfileB.makeBooking(profile.getEvent(1), 'A', 2);
+
 
                 Console.WriteLine("----------------------------------------------");
 

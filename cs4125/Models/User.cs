@@ -8,8 +8,6 @@ namespace cs4125.Models
 {
     public class User : Profile, IProfile
     {
-
-
         public List<Booking> Bookings { get; set; }
         public List<Booking> pendingBookings { get; set; }
         public List<Ticket> Tickets { get; set; }
@@ -145,5 +143,6 @@ namespace cs4125.Models
 
 
     }
+
 
 }

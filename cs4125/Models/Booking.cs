@@ -1,15 +1,15 @@
-﻿
 namespace cs4125.Models
 {
     public class Booking
     {
         public int Id { get; set; }
-        public User User { get; set; }
+        public Profile User { get; set; }
         public Event @event { get; set; }
         public int ticketsPurchased { get; set; }
         public double Paid { get; set; }
 
-        public Booking(int id, User user, Event @event, int ticketsPurchased, double paid)
+
+        public Booking(int id, Profile user, Event @event, int ticketsPurchased, double paid)
         {
             this.Id = id;
             this.User = user;
@@ -18,7 +18,8 @@ namespace cs4125.Models
             Paid = paid;
         }
 
-        public static Booking createBooking(int id, User user, Event @event, int ticketspurchased, double paid)
+
+        public static Booking createBooking(int id, Profile user, Event @event, int ticketspurchased, double paid)
         {
             return new Booking(id, user, @event, ticketspurchased, paid);
         }
