@@ -1,3 +1,4 @@
+
 namespace cs4125.Models
 {
 
@@ -30,6 +31,7 @@ namespace cs4125.Models
             Paid = paid;
         }
 
+
         /// <summary>
         /// Creates a new <c>Booking</c>. 
         /// </summary>
@@ -42,6 +44,7 @@ namespace cs4125.Models
         {
             return new Booking(id, user, @event, ticketsPurchased, paid);
         }
+
 
         /// <summary>
         /// Updates tickets availablitiy, available in the event being booked. 
@@ -63,7 +66,11 @@ namespace cs4125.Models
             return myTicket;
         }
 
-
+        /// <summary>
+        /// Get ticket to refund.
+        /// </summary>
+        /// <param name="ev">Event for ehich ticket is being refunded.</param>
+        /// <param name="block">Block in which ticket was purchased.</param>
         public Ticket refundTicket(Event ev, char block)
         {
             Ticket myTicket = null;
@@ -78,7 +85,7 @@ namespace cs4125.Models
             }
             return myTicket;
         }
-        
+      
         /// <summary>
         /// Returns the booking details as a string. 
         /// </summary>

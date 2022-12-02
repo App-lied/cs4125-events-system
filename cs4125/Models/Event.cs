@@ -91,6 +91,12 @@ namespace cs4125.Models
             Discounts.Add(d);
         }
 
+        /// <summary>
+        /// Checks if amount wanted less then remaining tickets.
+        /// </summary>
+        /// <param name="amount">The number of tickets wanted.</param>
+        public bool isEventAvailable(int amount) { if (amount<= RemainingTickets) { return true; } ; return false; }
+
 
         /// <summary>
         /// AAdd a new booking to the event.
