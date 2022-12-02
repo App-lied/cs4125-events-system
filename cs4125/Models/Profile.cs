@@ -44,9 +44,23 @@ namespace cs4125.Models
             Points = 300;
         }
 
+        /// <summary>
+        /// Check if user has sufficient funds.
+        /// </summary>
+        /// <param name="points">Points needed are less then points the user has.</param>
         public bool sufficientPoints(int points) { if (points <= Points) { return true; }; return false; }
-        public bool appropriateAge(int age) { if (age <= getAge()) { return true; }; return false; }
 
+        /// <summary>
+        /// Check if user is old enough.
+        /// </summary>
+        public bool appropriateAge() { if (16 <= getAge()) { return true; }; return false; }
+
+        /// <summary>
+        /// Temporarily store tickets until user purchases them.
+        /// </summary>
+        /// <param name="ev">Event for which ticket is being wanted.</param>
+        /// <param name="block">Block in which ticket is located.</param>
+        /// <param name="amount">Number of tickets.</param>
         public void addToCart(Event ev, char block, int amount)
         {
             int x = 1;
@@ -68,11 +82,22 @@ namespace cs4125.Models
             }
         }
 
+        /// <summary>
+        /// Adds points to user.
+        /// </summary>
+        /// <param name="points">Amount of points being topped up.</param>
         public void topPointsUp(int points)
         {
             Payment p = new Payment();
             p.topUpPoints(this, points);
         }
+
+
+        /// <summary>
+        /// Facade design pattern, used to call multiple methods to confirm user is eligable to buy ticket(s).
+        /// </summary>
+        /// <param name="ev">The event.</param>
+        /// <param name="amount">Amount of tickets being purchased.</param>
         public bool isEligable(Event ev, int amount)
         {
             Console.WriteLine($"{this.Name} started transaction for {ev.Name} tickets\n");
@@ -88,15 +113,16 @@ namespace cs4125.Models
                 Console.WriteLine($"Insuffient amount of points\n");
                 eligible = false;
             }
-            else if (!appropriateAge(getAge()))
+            else if (!appropriateAge())
             {
                 eligible = false;
             }
             return eligible;
         }
 
-
-
+        /// <summary>
+        /// Pay for tickets in cart.
+        /// </summary>
         public void payForTickets()
         {
             if (Cart.Count != 0)
@@ -126,6 +152,11 @@ namespace cs4125.Models
             }
         }
 
+        /// <summary>
+        /// Refunds the user.
+        /// </summary>
+        /// <param name="booking">Booking to be refunded.</param>
+        /// /// <param name="block">Block in which ticket is located.</param>
         public void refundTickets(Booking booking, char block)
         {
 
@@ -137,7 +168,8 @@ namespace cs4125.Models
 
                     while (x <= b.ticketsPurchased)
                     {
-                        b.refundTicket(b.@event, block);
+                        Ticket t = b.refundTicket(b.@event, block);
+                        b.@event.updateAvailableTickets(t, false);
                         x++;
 
                     }

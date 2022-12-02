@@ -41,6 +41,11 @@ namespace cs4125.Models
             return myTicket;
         }
 
+        /// <summary>
+        /// Get ticket to refund.
+        /// </summary>
+        /// <param name="ev">Event for ehich ticket is being refunded.</param>
+        /// <param name="block">Block in which ticket was purchased.</param>
         public Ticket refundTicket(Event ev, char block)
         {
             Ticket myTicket = null;
@@ -55,8 +60,6 @@ namespace cs4125.Models
             }
             return myTicket;
         }
-
-
         public string getBookingDetails()
         {
             return ($"{@event.getEventDetails()}Tickets purchased: {ticketsPurchased}; Paid {Paid}\n");
