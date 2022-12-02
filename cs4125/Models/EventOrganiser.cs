@@ -1,4 +1,4 @@
-﻿using cs4125.Models;
+using cs4125.Models;
 using System.Diagnostics.Tracing;
 using System.Linq.Expressions;
 

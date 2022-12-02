@@ -79,8 +79,8 @@ namespace cs4125.Controllers
             if (name != "")
             {
                 for (int i = 0; i < data.Length; i++)
-                {
-                    string[] rowData = data[i].Split(',');
+                {   
+                    string[] rowData = data[i].Split('#');
                     if (rowData[0] == email && rowData[1] == loggedInUser.Password)
                     {
                         string newCSVFile = csvFile.Replace(loggedInUser.Name, name);
@@ -94,7 +94,7 @@ namespace cs4125.Controllers
             {
                 for (int i = 0; i < data.Length; i++)
                 {
-                    string[] rowData = data[i].Split(',');
+                    string[] rowData = data[i].Split('#');
                     if (rowData[0] == email && rowData[1] == loggedInUser.Password)
                     {
                         string newCSVFile = csvFile.Replace(loggedInUser.photo, photo);

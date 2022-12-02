@@ -1,5 +1,3 @@
-﻿
-using Microsoft.CodeAnalysis.Differencing;
 
 namespace cs4125.Models
 {
@@ -11,6 +9,7 @@ namespace cs4125.Models
         public int ticketsPurchased { get; set; }
         public double Paid { get; set; }
 
+
         public Booking(int id, Profile user, Event @event, int ticketsPurchased, double paid)
         {
             this.Id = id;
@@ -20,7 +19,7 @@ namespace cs4125.Models
             Paid = paid;
         }
 
-        public static Booking createBooking(int id, Profile user, Event @event, int ticketspurchased, double paid)
+        public static Booking createBooking(int id, User user, Event @event, int ticketspurchased, double paid)
         {
             return new Booking(id, user, @event, ticketspurchased, paid);
         }

@@ -6,29 +6,25 @@ class LoggedInUser
 
     private static LoggedInUser _instance;
 
-    // We now have a lock object that will be used to synchronize threads
+    // We now have a lock object that will be used to lock the login
     // during first access to the Singleton.
     private static readonly object _lock = new object();
 
     public static LoggedInUser GetInstance(string email, string password, string name, string photo = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png", bool createIfNeeded = true)
     {
         // This conditional is needed to prevent threads stumbling over the
-        // lock once the instance is ready.
+        // lock once the instance is ready. And will prevent null values being called if createIfNeeded is false
         if (_instance == null && createIfNeeded)
         {
-            // Now, imagine that the program has just been launched. Since
-            // there's no Singleton instance yet, multiple threads can
-            // simultaneously pass the previous conditional and reach this
-            // point almost at the same time. The first of them will acquire
-            // lock and will proceed further, while the rest will wait here.
+            // There's no Singleton instance yet, a login will
+            // pass the previous conditional and reach this
+            // point. The first of login will acquire the lock
             lock (_lock)
             {
-                // The first thread to acquire the lock, reaches this
-                // conditional, goes inside and creates the Singleton
-                // instance. Once it leaves the lock block, a thread that
-                // might have been waiting for the lock release may then
-                // enter this section. But since the Singleton field is
-                // already initialized, the thread won't create a new
+                // The first login goes inside and creates the Singleton
+                // instance. Once it leaves the lock block, any other logins
+                // won't be able to change the value. Because now the Singleton field is
+                // already initialized, the call won't create a new
                 // object.
                 if (_instance == null)
                 {
@@ -43,7 +39,6 @@ class LoggedInUser
         return _instance;
     }
 
-    // We'll use this property to prove that our Singleton really works.
     public string Email { get; set; }
     public string Password { get; set; }
     public string Name { get; set; }

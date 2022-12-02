@@ -1,4 +1,4 @@
-﻿using cs4125.FactoryInterface;
+using cs4125.FactoryInterface;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Xml.Linq;

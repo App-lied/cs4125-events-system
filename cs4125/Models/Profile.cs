@@ -16,6 +16,7 @@ namespace cs4125.Models
         public List<Ticket> Cart { get; set; }
         public int Points { get; set; }
 
+
         public abstract void GetProfile();
         public int getAge()
         {
