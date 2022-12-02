@@ -53,6 +53,7 @@ namespace cs4125.Controllers
                 }
 
                 //follows the same format as event organiser factory but checks if the account is premimum or not and acts accordingly
+                //creates a User Factory
                 UserFactory userF = new UserFactory();
                 if (premium == "on")
                 {

@@ -23,7 +23,7 @@
             //writes the information thats been passed in to the data csv, and sets the photo to be the basic profile photo
             using (System.IO.StreamWriter file = new System.IO.StreamWriter("Data/LoginInformation.csv", true))
             {
-                file.WriteLine(Email + "," + Password + "," + Name + "," + DateOfBirth.Date.ToString()+ ", https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png");
+                file.WriteLine(Email + "#" + Password + "#" + Name + "#" + DateOfBirth.Date.ToString()+ "# https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png");
             }
         }
     }
