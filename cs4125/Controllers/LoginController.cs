@@ -27,7 +27,7 @@ namespace cs4125.Controllers
             for (int i = 0; i < data.Length; i++)
             {
                 //splits the lines into segments seperated by commas and stores them in a data array
-                string[] rowData = data[i].Split(',');
+                string[] rowData = data[i].Split('#');
                 //checks if the email and password entered matches any corresponding email and password in the csv file
                 if (rowData[0] == email && rowData[1] == password)
                 {

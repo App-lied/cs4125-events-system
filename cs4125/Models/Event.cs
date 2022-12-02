@@ -91,6 +91,11 @@ namespace cs4125.Models
             Discounts.Add(d);
         }
 
+
+        public bool isEventAvailable(int amount) { if (amount<= RemainingTickets) { return true; } ; return false; }
+
+
+
         public void AddBooking(Booking b)
         {
             Bookings.Add(b);

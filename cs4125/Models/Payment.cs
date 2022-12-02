@@ -5,12 +5,12 @@
 
         public Payment() { }
 
-        public double topUpPoints(User user, int points)
+        public double topUpPoints(Profile user, int points)
         {
             return user.Points += points;
         }
 
-        public Tuple<bool, double> makePayemnt(User user, List<Ticket> inCart, Event ev)
+        public Tuple<bool, double> makePayemnt(Profile user, List<Ticket> inCart, Event ev)
         {
             double total = 0;
 
@@ -38,7 +38,7 @@
             return Tuple.Create(false, 0.0);
         }
 
-        public void refundPayemnt(User user, double paid)
+        public void refundPayemnt(Profile user, double paid)
         {
 
             user.Points += (int)paid;
