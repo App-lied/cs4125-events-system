@@ -1,17 +1,25 @@
-﻿namespace cs4125.Models
+﻿using Microsoft.AspNetCore.Hosting.Server;
+using System;
+using System.Transactions;
+
+namespace cs4125.Models
 {
     /// <summary>
     /// Class <c> Event </c> models an event and available tickets.
     /// </summary>
-    public class Event
+    public class Event : IEvent
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public Venue Venue { get; set; }
         public DateTime DateTime { get; set; }
+        public double BasePrice { get; set; }
         public List<IDiscount>? Discounts { get; set; }
         public List<Ticket> Tickets { get; set; }
+
+        public List<Booking> Bookings { get; set; }
         public int RemainingTickets { get; set; }
+        private List<IProfile> observers = new List<IProfile>();
 
         /// <summary>
         /// Constructor for an <c>Event</c>. Creates a new <c>Ticket</c> for each seat in the venue.
@@ -21,20 +29,26 @@
         /// <param name="venue">The venue where the event is held.</param>
         /// <param name="dt">The date and time of the event.</param>
         /// <param name="basePrice">The base price of a ticket for the event.</param>
-        public Event(int id, string name, Venue venue, DateTime dt, double basePrice) { 
+        public Event(int id, string name, Venue venue, DateTime dt, double basePrice)
+        {
             Id = id;
             Name = name;
             Venue = venue;
             DateTime = dt;
-            Discounts= new List<IDiscount>();
-            Tickets = new List<Ticket>();  
+            BasePrice = basePrice;
+            RemainingTickets = venue.Capacity;
+            Discounts = new List<IDiscount>();
+            Tickets = new List<Ticket>();
+            Bookings = new List<Booking>();
 
-            foreach (Block b in venue.Blocks) { 
+            foreach (Block b in Venue.Blocks)
+            {
                 foreach (Seat s in b.Seats)
                 {
-                    Tickets.Add(Ticket.createTicket(basePrice, s));
+                    Tickets.Add(Ticket.createTicket(BasePrice, s));
                 }
             }
+
         }
 
         /// <summary>
@@ -57,11 +71,12 @@
         /// <param name="purchased">Whether the ticket was purchased or refunded.</param>
         public void updateAvailableTickets(Ticket t, bool purchased)
         {
-            if(purchased == true)
+            if (purchased == true)
             {
                 t.Purchased = purchased;
                 RemainingTickets--;
-            } else
+            }
+            else
             {
                 t.Purchased = purchased;
                 RemainingTickets++;
@@ -75,6 +90,50 @@
         public void addDiscount(IDiscount d)
         {
             Discounts.Add(d);
+        }
+
+        public void AddBooking(Booking b)
+        {
+            Bookings.Add(b);
+        }
+
+
+        public void RegisterObserver(IProfile observer)
+        {
+            Console.WriteLine($"Observer Added : {((User)observer).Name}\n");
+            observers.Add(observer);
+        }
+        public void AddObservers(IProfile observer)
+        {
+            observers.Add(observer);
+        }
+        public void RemoveObserver(IProfile observer)
+        {
+            observers.Remove(observer);
+        }
+        public void NotifyObservers()
+        {
+            Console.WriteLine($"Event :{this.Name} has been edited.\n");
+            foreach (IProfile observer in observers)
+            {
+                observer.updateEvent(this);
+            }
+        }
+
+        public void NotifyObserversCancelled()
+        {
+            Console.WriteLine($"Event :{this.Name} has been canceled.\n");
+            foreach (IProfile observer in observers)
+            {
+                observer.updateEventCancelled(this);
+            }
+        }
+
+
+
+        public string getEventDetails()
+        {
+            return ($"Name: {Name}; Date: {DateTime}\nTickets Available: {RemainingTickets}; Price: {BasePrice}\n{Venue.getVenueDetails()}\n");
         }
     }
 }
