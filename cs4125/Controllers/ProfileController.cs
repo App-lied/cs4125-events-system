@@ -12,8 +12,11 @@ namespace cs4125.Controllers
         // GET: ProfileController
         public ActionResult Profile()
         {
-            
-           LoggedInUser UserCheck = LoggedInUser.GetInstance("", "", "", "", false);
+            //uses singleton method to lock in a user as the logged in user
+
+            //uses the createdIfNeeded boolean operator to choose to not create a new instance so that it can check if one is created
+            //if one is created, it will load profile with the necessary information, otherwise it redirects to the login page
+            LoggedInUser UserCheck = LoggedInUser.GetInstance("", "", "", "", false);
             if (UserCheck != null)
             {
                 LoggedInUser loggedInUser = LoggedInUser.GetInstance("", "", "");

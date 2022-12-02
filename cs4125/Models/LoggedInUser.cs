@@ -48,4 +48,6 @@ class LoggedInUser
     public string Password { get; set; }
     public string Name { get; set; }
     public string photo { get; set; }
+
+
 }

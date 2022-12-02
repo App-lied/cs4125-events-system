@@ -19,14 +19,35 @@ namespace cs4125.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register(IFormCollection collection)
         {
+            //reads in the form details
             var email = collection["registrationEmail"];
             var password = collection["registrationPassword"];
             var password2 = collection["registrationPassword2"];
             var name = collection["registrationName"];
             var premium = collection["registrationPremium"];
+            var eventorganiser = collection["registrationOrganiser"];
             DateTime birth = DateTime.Parse(collection["registrationDate"]);
+
+            //checks the passwords match
             if (password == password2)
             {
+                if (eventorganiser == "on")
+                {
+                    EventOrganiserFactory userFevent = new EventOrganiserFactory();
+                    Profile profile = userFevent.GetProfile(ProfileType.EventOrganiser, email, password, name, birth);
+                    if (profile.getAge() <= 16)
+                    {
+                        ViewBag.error = "Profile not created: Must be over 16 years old";
+                        return View();
+                    }
+                    else
+                    {
+                        profile.writeInfoToCSV();
+                        LoggedInUser login = LoggedInUser.GetInstance(email, password, name);
+                        return RedirectToAction("Profile", "Profile");
+                    }
+                }
+                //creates a User Factory
                 UserFactory userF = new UserFactory();
                 if (premium == "on")
                 {

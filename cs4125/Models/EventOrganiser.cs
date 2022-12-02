@@ -9,6 +9,8 @@ namespace cs4125.Models
         {
             Console.WriteLine("Event Organiser Profile");
         }
+
+        //overrides the writeInfoToCSV method to add a eventOrg tag
         public override void writeInfoToCSV()
         {
             using (System.IO.StreamWriter file = new System.IO.StreamWriter("Data/LoginInformation.csv", true))

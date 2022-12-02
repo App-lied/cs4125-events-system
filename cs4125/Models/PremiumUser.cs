@@ -8,6 +8,7 @@
             Console.WriteLine("Premium User Profile");
         }
 
+        //overrides the writeInfoToCSV method to add a premium tag
         public override void writeInfoToCSV()
         {
             using (System.IO.StreamWriter file = new System.IO.StreamWriter("Data/LoginInformation.csv", true))
