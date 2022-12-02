@@ -20,6 +20,7 @@ namespace cs4125.Models
                 Console.WriteLine($"User Logged in: {loggedInUser.Name}; Event Organiser\n\n");
 
                 DateTime dt = new DateTime(2012, 12, 25, 10, 30, 50);
+                DateTime bd = new DateTime(1990, 12, 25, 10, 30, 50);
 
                 EventOrganiserFactory userF = new EventOrganiserFactory();
                 EventOrganiser profile = (EventOrganiser)userF.GetProfile(ProfileType.EventOrganiser, loggedInUser.Email, loggedInUser.Password, loggedInUser.Name, dt);
@@ -56,12 +57,12 @@ namespace cs4125.Models
                 Console.WriteLine("Create new users");
                 Console.WriteLine("----------------------------------------------");
                 UserFactory userA = new UserFactory();
-                User userProfileA = (User)userA.GetProfile(ProfileType.User, "Wiki@gmail", "pass", "Wiki", dt);
+                User userProfileA = (User)userA.GetProfile(ProfileType.User, "Wiki@gmail", "pass", "Wiki", bd);
                 userProfileA.initializeLists();
                 Console.WriteLine($"User Logged in: {userProfileA.Name}; User\n");
 
                 UserFactory userB = new UserFactory();
-                User userProfileB = (User)userB.GetProfile(ProfileType.User, "Sean@gmail", "pass", "Sean", dt);
+                User userProfileB = (User)userB.GetProfile(ProfileType.User, "Sean@gmail", "pass", "Sean", bd);
                 userProfileB.initializeLists();
                 Console.WriteLine($"User Logged in: {userProfileB.Name}; User\n");
 
@@ -106,7 +107,6 @@ namespace cs4125.Models
                 Console.WriteLine("Editing an event -- notifies user who booked (observer)");
                 Console.WriteLine("----------------------------------------------");
                 profile.editEvent(1, "Name", "Billie Eyelid");
-
 
                 Console.WriteLine("----------------------------------------------");
                 Console.WriteLine("Checking if refunds work");

@@ -95,7 +95,7 @@ namespace cs4125.Models
         /// Checks if amount wanted less then remaining tickets.
         /// </summary>
         /// <param name="amount">The number of tickets wanted.</param>
-        public bool isEventAvailable(int amount) { if (amount<= RemainingTickets) { return true; } ; return false; }
+        public bool isEventAvailable(int amount) { if (amount <= RemainingTickets) { return true; } ; return false; }
 
 
         /// <summary>

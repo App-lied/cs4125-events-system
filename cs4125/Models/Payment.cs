@@ -34,8 +34,6 @@
             }
             if (total <= user.Points)
             {
-
-                
                 Console.WriteLine($"Payment Successful");
                 return Tuple.Create(true, total);
             }
@@ -45,8 +43,7 @@
                 return Tuple.Create(false, 0.0);
             }
 
-            Console.WriteLine($"Error Occured");
-            return Tuple.Create(false, 0.0);
+            
         }
 
         /// <summary>

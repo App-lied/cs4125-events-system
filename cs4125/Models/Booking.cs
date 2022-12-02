@@ -40,7 +40,7 @@ namespace cs4125.Models
         /// <param name="event">TThe event being booked.</param>
         /// <param name="ticketsPurchased">Amount of tickets being booked.</param>
         /// <param name="paid">Cost of the booking.</param>
-        public static Booking createBooking(int id, Profile user, Event @event, int ticketspurchased, double paid)
+        public static Booking createBooking(int id, Profile user, Event @event, int ticketsPurchased, double paid)
         {
             return new Booking(id, user, @event, ticketsPurchased, paid);
         }

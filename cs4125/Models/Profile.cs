@@ -65,13 +65,6 @@ namespace cs4125.Models
         /// <param name="block">Block in which ticket is located.</param>
         /// <param name="amount">Number of tickets.</param>
         public void addToCart(Event ev, char block, int amount)
-        
-        /// Creates a booking and ticket for an event.
-        /// </summary>
-        /// <param name="ev">The event.</param>
-        /// <param name="block">The seating/standingg area.</param>
-        /// <param name="amount">The number of tickets a user wants to book.</param>
-        public void makeBooking(Event ev, char block, int amount)
         {
             int x = 1;
             Booking b = new Booking(Bookings.Count + 1, this, ev, amount, 0.0);
@@ -83,7 +76,6 @@ namespace cs4125.Models
                 {
                     Cart.Add(b.getTicket(ev, block));
                     x++;
-
                 }
             }
             else
@@ -110,7 +102,7 @@ namespace cs4125.Models
         /// <param name="amount">Amount of tickets being purchased.</param>
         public bool isEligable(Event ev, int amount)
         {
-            Console.WriteLine($"{this.Name} started transaction for {ev.Name} tickets\n");
+            Console.WriteLine($"{Name} started transaction for {ev.Name} tickets\n");
             bool eligible = true;
 
             if (!(ev.isEventAvailable(amount)))
@@ -126,6 +118,7 @@ namespace cs4125.Models
             else if (!appropriateAge())
             {
                 eligible = false;
+                Console.WriteLine($"{Name} too you to purchase tickets");
             }
             return eligible;
         }
