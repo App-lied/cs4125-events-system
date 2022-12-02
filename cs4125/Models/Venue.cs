@@ -18,9 +18,10 @@
         /// <param name="id">The identifier for the venue.</param>
         /// <param name="name">The name of the venue.</param>
         /// <param name="address">The location of the venue.</param>
-        public Venue(int id, string name, string address) {
+        public Venue(int id, string name, string address)
+        {
             this.Id = id;
-            this.Name = name;  
+            this.Name = name;
             this.Address = address;
             Blocks = new List<Block>();
             Events = new List<Event>();
@@ -46,6 +47,17 @@
             Blocks.Add(block);
             Capacity += block.Capacity;
         }
+
+        public string getVenueDetails()
+        {
+            string tempCapacity = "";
+            for (int i = 0; i < Blocks.Count; i++)
+            {
+                tempCapacity = tempCapacity + "Block " + Blocks[i].Id + ": " + Blocks[i].Capacity + "\n\t";
+            }
+
+            return ($"Venue: {Name}\nAddress: {Address}\n");
+        }
     }
 
     /// <summary>
@@ -53,7 +65,7 @@
     /// </summary>
     public class Block
     {
-        public string Id { get; set; }
+        public char Id { get; set; }
         public List<Seat> Seats { get; set; }
         public int Capacity { get; set; }
         public double Premium { get; set; }
@@ -64,12 +76,14 @@
         /// <param name="id">The identifier for the block, e.g: A, B, C, etc.</param>
         /// <param name="cap">The capacity of the block.</param>
         /// <param name="prem">The the premium applied to ticket prices in the block.</param>
-        public Block(string id, int cap, double prem)
+        public Block(char id, int cap, double prem)
         {
             Id = id;
             Capacity = cap;
             Premium = prem;
-            for(int i = 1; i <= Capacity; i++)
+
+            Seats = new List<Seat>();
+            for (int i = 1; i <= Capacity; i++)
             {
                 Seats.Add(Seat.createSeat(i, this));
             }
@@ -81,7 +95,7 @@
         /// <param name="id">The identifier for the block, e.g: A, B, C, etc.</param>
         /// <param name="cap">The capacity of the block.</param>
         /// <param name="prem">The the premium applied to ticket prices in the block.</param>
-        public static Block createBlock(string id, int cap, double prem)
+        public static Block createBlock(char id, int cap, double prem)
         {
             return new Block(id, cap, prem);
         }

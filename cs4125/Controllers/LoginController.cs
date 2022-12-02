@@ -33,6 +33,7 @@ namespace cs4125.Controllers
                 {
                     //creates the locked in singleton LoggedInUser
                     LoggedInUser login = LoggedInUser.GetInstance(email, password, rowData[2], rowData[4]);
+                    CLIDisplay display = new CLIDisplay();
                     //redirects to the profile page
                     return RedirectToAction("Profile", "Profile");
                 }
