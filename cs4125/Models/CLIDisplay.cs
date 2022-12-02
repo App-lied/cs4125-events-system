@@ -41,7 +41,7 @@ namespace cs4125.Models
 
 
                 Console.WriteLine("----------------------------------------------");
-                Console.WriteLine("Events created by user\n");
+                Console.WriteLine("Events available\n");
                 Console.WriteLine(profile.getListEvents());
 
                 Console.WriteLine("----------------------------------------------");
