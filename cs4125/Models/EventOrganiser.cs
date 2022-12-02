@@ -6,12 +6,19 @@ namespace cs4125.Models
 {
     public class EventOrganiser : Profile
     {
+        /// <summary>
+        /// Gets the profile of a user.
+        /// </summary>
         public List<Event> Events { get; set; }
         public override void GetProfile()
         {
             Console.WriteLine("Event Organiser Profile");
 
         }
+
+        /// <summary>
+        /// Adds acount information to a CSV.
+        /// </summary>
         public override void writeInfoToCSV()
         {
             using (System.IO.StreamWriter file = new System.IO.StreamWriter("Data/LoginInformation.csv", true))
@@ -20,11 +27,21 @@ namespace cs4125.Models
             }
         }
 
+        /// <summary>
+        /// Creates a new list of events.
+        /// </summary>
         public void initializeEventList()
         {
             Events = new List<Event>();
         }
 
+        /// <summary>
+        /// Creates an event.
+        /// </summary>
+        /// <param name="name">The name of the event.</param>
+        /// <param name="venue">The venue for the event.</param>
+        /// <param name="dt">The date and time of the event.</param>
+        /// <param name="price">The price of the event.</param>
         public void createEvent(string name, Venue venue, DateTime dt, double price)
         {
             Event ev = new Event(Events.Count + 1, name, venue, dt, price);
@@ -32,6 +49,10 @@ namespace cs4125.Models
 
         }
 
+        /// <summary>
+        /// Gets the id of an event.
+        /// </summary>
+        /// <param name="id">The identifier for the event.</param>
         public Event getEvent(int id)
         {
             Event myEv = null;
@@ -46,6 +67,9 @@ namespace cs4125.Models
             return myEv;
         }
 
+        /// <summary>
+        /// Lists the events.
+        /// </summary>
         public string getListEvents()
         {
             string allEvents = "";
@@ -58,6 +82,12 @@ namespace cs4125.Models
             return allEvents;
         }
 
+        /// <summary>
+        /// Edits the details of an event.
+        /// </summary>
+        /// <param name="id">The identifier for the event to be edited.</param>
+        /// <param name="property">The parameter being edited for the event.</param>
+        /// <param name="edit">The new value.</param>
         public void editEvent(int id, string property, dynamic edit)
         {
             foreach (Event ev in Events)
@@ -84,6 +114,10 @@ namespace cs4125.Models
             }
         }
 
+        /// <summary>
+        /// Removes an event.
+        /// </summary>
+        /// <param name="ev">The event being cancelled.</param>
         public void deleteEvent(Event ev)
         {
             Payment p = new Payment();

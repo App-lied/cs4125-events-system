@@ -98,26 +98,48 @@ namespace cs4125.Models
         public bool isEventAvailable(int amount) { if (amount<= RemainingTickets) { return true; } ; return false; }
 
 
-
+        /// <summary>
+        /// AAdd a new booking to the event.
+        /// </summary>
+        /// <param name="b">The booking to be added.</param>
         public void AddBooking(Booking b)
         {
             Bookings.Add(b);
         }
 
-
+        /// <summary>
+        /// Calls the add observer method to register a new profile watching the event.
+        /// </summary>
+        /// <param name="observer">The profile that is observing the event.</param>
         public void RegisterObserver(IProfile observer)
         {
             Console.WriteLine($"Observer Added : {((User)observer).Name}\n");
             observers.Add(observer);
         }
+
+        /// <summary>
+        /// Adds an observer to the event.
+        /// </summary>
+        /// <param name="observer">The profile that is observing the event.</param>
         public void AddObservers(IProfile observer)
         {
             observers.Add(observer);
         }
+
+        /// <summary>
+        /// Removed an observer from the event.
+        /// </summary>
+        /// <param name="observer">The profile that is being removed from observing the event.</param>
         public void RemoveObserver(IProfile observer)
         {
             observers.Remove(observer);
         }
+
+        ///////////
+
+        /// <summary>
+        /// Notify observers that the event was updated.
+        /// </summary>
         public void NotifyObservers()
         {
             Console.WriteLine($"Event :{this.Name} has been edited.\n");
@@ -127,6 +149,9 @@ namespace cs4125.Models
             }
         }
 
+        /// <summary>
+        /// Notify the observersthe event was cancelled.
+        /// </summary>
         public void NotifyObserversCancelled()
         {
             Console.WriteLine($"Event :{this.Name} has been canceled.\n");
@@ -136,6 +161,9 @@ namespace cs4125.Models
             }
         }
 
+        /// <summary>
+        /// Gets details about the event.
+        /// </summary>
         public string getEventDetails()
         {
             return ($"Name: {Name}; Date: {DateTime}\nTickets Available: {RemainingTickets}; Price: {BasePrice}\n{Venue.getVenueDetails()}\n");

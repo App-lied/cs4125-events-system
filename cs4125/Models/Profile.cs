@@ -34,7 +34,10 @@ namespace cs4125.Models
                 file.WriteLine(Email + "#" + Password + "#" + Name + "#" + DateOfBirth.Date.ToString()+ "# https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png");
             }
         }
-
+ 
+        /// <summary>
+        /// Creates a list of bookings and tickets.
+        /// </summary>
         public void initializeLists()
         {
             Cart = new List<Ticket>();
@@ -62,6 +65,13 @@ namespace cs4125.Models
         /// <param name="block">Block in which ticket is located.</param>
         /// <param name="amount">Number of tickets.</param>
         public void addToCart(Event ev, char block, int amount)
+        
+        /// Creates a booking and ticket for an event.
+        /// </summary>
+        /// <param name="ev">The event.</param>
+        /// <param name="block">The seating/standingg area.</param>
+        /// <param name="amount">The number of tickets a user wants to book.</param>
+        public void makeBooking(Event ev, char block, int amount)
         {
             int x = 1;
             Booking b = new Booking(Bookings.Count + 1, this, ev, amount, 0.0);
@@ -189,6 +199,9 @@ namespace cs4125.Models
             }
         }
 
+        /// <summary>
+        /// Gets the bookings for an event.
+        /// </summary>
         public string getBookings()
         {
             string bookingsString = "";
@@ -199,6 +212,10 @@ namespace cs4125.Models
             return bookingsString;
         }
 
+        /// <summary>
+        /// Adds an event observer to the profile.
+        /// </summary>
+        /// <param name="ev">The event.</param>
         public void createEventObserver(IEvent ev)
         {
 
@@ -211,11 +228,19 @@ namespace cs4125.Models
             ev.RemoveObserver(this);
         }
 
+        /// <summary>
+        /// Updates the event.
+        /// </summary>
+        /// <param name="ev">The event.</param>
         public void updateEvent(Event ev)
         {
             Console.WriteLine($"Hello {Name}, an event in your bookings has been updated.\nEvent updated is: {ev.Name}\n");
         }
 
+        /// <summary>
+        /// Cancels the event.
+        /// </summary>
+        /// <param name="ev">The event.</param>
         public void updateEventCancelled(Event ev)
         {
             foreach (Booking b in Bookings)
