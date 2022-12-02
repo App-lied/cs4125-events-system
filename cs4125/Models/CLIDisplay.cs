@@ -1,4 +1,4 @@
-﻿using cs4125.FactoryInterface;
+using cs4125.FactoryInterface;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Xml.Linq;
@@ -57,6 +57,13 @@ namespace cs4125.Models
 
 
                 userProfileA.initializeLists();
+                userProfileA.addToCart(profile.getEvent(1), 'A', 1);
+
+                userProfileB.initializeLists();
+                userProfileB.addToCart(profile.getEvent(1), 'A', 2);
+
+                userProfileA.payForTickets();
+                userProfileB.payForTickets();
                 userProfileA.makeBooking(profile.getEvent(1), 'A', 1);
 
                 userProfileB.initializeLists();
@@ -70,6 +77,10 @@ namespace cs4125.Models
 
                 Console.WriteLine("----------------------------------------------");
                 profile.editEvent(1, "Name", "Billie Eyelid");
+
+                userProfileA.refundTickets(userProfileA.Bookings[0], 'A');
+
+                Console.WriteLine(userProfileA.getBookings());
 
 
 
