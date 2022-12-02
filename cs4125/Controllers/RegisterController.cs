@@ -48,6 +48,7 @@ namespace cs4125.Controllers
                         //writes the information to the login information csv and sets the singleton to the registered user
                         profile.writeInfoToCSV();
                         LoggedInUser login = LoggedInUser.GetInstance(email, password, name);
+                        CLIDisplay display = new CLIDisplay();
                         return RedirectToAction("Profile", "Profile");
                     }
                 }

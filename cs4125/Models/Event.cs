@@ -16,7 +16,6 @@ namespace cs4125.Models
         public double BasePrice { get; set; }
         public List<IDiscount>? Discounts { get; set; }
         public List<Ticket> Tickets { get; set; }
-
         public List<Booking> Bookings { get; set; }
         public int RemainingTickets { get; set; }
         private List<IProfile> observers = new List<IProfile>();
@@ -128,8 +127,6 @@ namespace cs4125.Models
                 observer.updateEventCancelled(this);
             }
         }
-
-
 
         public string getEventDetails()
         {
