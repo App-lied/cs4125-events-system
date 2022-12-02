@@ -30,13 +30,21 @@
             }
         }
 
-
+        /// <summary>
+        /// Creates a list of bookings and tickets.
+        /// </summary>
         public void initializeLists()
         {
             Bookings = new List<Booking>();
             Tickets = new List<Ticket>();
         }
 
+        /// <summary>
+        /// Creates a booking and ticket for an event.
+        /// </summary>
+        /// <param name="ev">The event.</param>
+        /// <param name="block">The seating/standingg area.</param>
+        /// <param name="amount">The number of tickets a user wants to book.</param>
         public void makeBooking(Event ev, char block, int amount)
         {
             int x = 1;
@@ -54,7 +62,9 @@
 
         }
 
-
+        /// <summary>
+        /// Gets the bookings for an event.
+        /// </summary>
         public string getBookings()
         {
             string bookingsString = "";
@@ -65,17 +75,29 @@
             return bookingsString;
         }
 
+        /// <summary>
+        /// Adds an event observer to the profile.
+        /// </summary>
+        /// <param name="ev">The event.</param>
         public void createEventObserver(IEvent ev)
         {
 
             ev.RegisterObserver(this);
         }
 
+        /// <summary>
+        /// Updates the event.
+        /// </summary>
+        /// <param name="ev">The event.</param>
         public void updateEvent(Event ev)
         {
             Console.WriteLine($"Hello {Name}, an event in your bookings has been updated.\nEvent updated is: {ev.Name}\n");
         }
 
+        /// <summary>
+        /// Cancels the event.
+        /// </summary>
+        /// <param name="ev">The event.</param>
         public void updateEventCancelled(Event ev)
         {
             foreach (Booking b in Bookings)

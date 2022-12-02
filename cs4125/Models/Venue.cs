@@ -48,6 +48,9 @@
             Capacity += block.Capacity;
         }
 
+        /// <summary>
+        /// Gets the details of a venue.
+        /// </summary>
         public string getVenueDetails()
         {
             string tempCapacity = "";
